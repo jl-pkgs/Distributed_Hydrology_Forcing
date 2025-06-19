@@ -14,5 +14,13 @@ plot(r)
 plot(shp, add = TRUE)
 
 x = as.vector(r)
-ngrid = sum(!is.na(x)) # 1079 rids
+ngrid = sum(!is.na(x)) # 1079 grids
 ngrid/length(x)
+
+## Forcing_urban
+ra = rast("data/ChinaUrban_500m_2018.tif")
+ra2 = aggregate(ra, fact=2)
+writeRaster(ra2, "data/ChinaUrban_1km_2018.tif")
+
+ra_urban = rast("data/ChinaUrban_500m_2018.tif")
+ra = crop(ra_urban, poly)
